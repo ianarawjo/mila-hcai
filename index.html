@@ -49,6 +49,12 @@
           document.querySelectorAll('.lds-ellipsis').forEach(e => e.remove());
 
           // Success processing sheet --inject it into the HTML:
+          eventsData.past_events.sort((a, b) => {
+            const aDate = Date.parse(a.Date);
+            const bDate = Date.parse(b.Date);
+            return (isNaN(bDate) ? -Infinity : bDate) - (isNaN(aDate) ? -Infinity : aDate);
+          });
+
           Object.keys(eventsData).forEach((event_container_id) => {
             let eventsContainer = document.getElementById(event_container_id);
             eventsData[event_container_id].forEach(function(event) {
